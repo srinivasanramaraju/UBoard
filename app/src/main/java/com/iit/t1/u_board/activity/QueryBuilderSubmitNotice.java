@@ -71,7 +71,7 @@ public class QueryBuilderSubmitNotice {
         return String
                 .format("{\"document\"  : {\"noticetitle\": \"%s\", "
                                 + "\"category\": \"%s\", \"description\": \"%s\", "
-                                + "\"phone\": \"0\"}, \"password\" : \"0\"}",
-                        uboardNotices.noticeTitle,uboardNotices.category, uboardNotices.description);
+                                + "\"NoticeId\": \"%s\"}, \"password\" : \"0\"}",
+                        uboardNotices.noticeTitle,uboardNotices.category, uboardNotices.description,uboardNotices.id);
     }
 }

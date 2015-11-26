@@ -79,6 +79,9 @@
     <!-- Server Client ID.  This should be a valid Web OAuth 2.0 Client ID obtained
          from https://console.developers.google.com/ -->
     <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
+    <string name="menu_delete">Delete Notice</string>
+    <string name="menu_share">Share Notice</string>
+    <string name="menu_update">Update Notice</string>
 
 
 </resources>

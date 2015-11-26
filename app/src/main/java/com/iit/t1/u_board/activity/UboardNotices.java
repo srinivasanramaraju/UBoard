@@ -51,5 +51,7 @@ import com.iit.t1.u_board.R;
     return id;
     }
 
-
+    public String getDescription() {
+        return description;
+    }
 }

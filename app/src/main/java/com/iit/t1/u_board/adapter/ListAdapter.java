@@ -30,6 +30,7 @@ public class ListAdapter extends ArrayAdapter<String> {
         this.data = data;
         this.pics = pics;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 

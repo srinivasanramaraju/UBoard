@@ -1,5 +1,6 @@
 package com.iit.t1.u_board.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,12 +16,18 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.iit.t1.u_board.R;
 
 
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener
+public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener,GoogleApiClient.OnConnectionFailedListener
          {
-
+             private GoogleApiClient mGoogleApiClient;
     private static String TAG = MainActivity.class.getSimpleName();
     ImageButton imageButton;
     private Toolbar mToolbar;
@@ -39,6 +46,13 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -109,8 +123,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             case 6:
 
                 //fragment = new SignOutFragment();
-                signout= new SignInActivity();
-
+                signOut();
                 title = getString(R.string.title_signout);
                 break;
 
@@ -196,4 +209,23 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         imageButton.setVisibility(View.VISIBLE);
         getSupportActionBar().setTitle(title);
     }
-}
+
+             @Override
+             public void onConnectionFailed(ConnectionResult connectionResult) {
+
+             }
+
+
+             private void signOut() {
+                 Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                         new ResultCallback<Status>() {
+                             @Override
+                             public void onResult(Status status) {
+                                 // [START_EXCLUDE]
+                                 Intent logout=new Intent(MainActivity.this,SignInActivity.class);
+                                 MainActivity.this.startActivity(logout);
+                                 // [END_EXCLUDE]
+                             }
+                         });
+             }
+         }

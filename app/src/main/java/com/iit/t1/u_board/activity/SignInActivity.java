@@ -3,13 +3,18 @@ package com.iit.t1.u_board.activity;
 /**
  * Created by Nivash on 11/14/2015.
  */
-
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
@@ -38,11 +43,21 @@ public class SignInActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
+    public static String userName;
+    PackageInfo info;
+    EditText et;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mainlogin);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = cm
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo datac = cm
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if ((wifi != null & datac != null)
+                && (wifi.isConnected() | datac.isConnected())) {
+            setContentView(R.layout.activity_mainlogin);
 
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
@@ -80,32 +95,71 @@ public class SignInActivity extends AppCompatActivity implements
         SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
         signInButton.setScopes(gso.getScopeArray());
-        // [END customize_button]
+        }else{
+            //no connection
+            final AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
+            builder.setTitle("NO INTERNET");
+            builder.setIcon(R.drawable.ic_alert2);
+            builder.setMessage("No Internet Connection Available...Turn on Mobile data or Wifi.");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            builder.create();
+            builder.show();
+        }
+
     }
+
+
 
     @Override
     public void onStart() {
         super.onStart();
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = cm
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo datac = cm
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if ((wifi != null & datac != null)
+                && (wifi.isConnected() | datac.isConnected())) {
 
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if (opr.isDone()) {
-            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
-            // and the GoogleSignInResult will be available instantly.
-            Log.d(TAG, "Got cached sign-in");
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        } else {
-            // If the user has not previously signed in on this device or the sign-in has expired,
-            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
-            // single sign-on will occur in this branch.
-            showProgressDialog();
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                    hideProgressDialog();
-                    handleSignInResult(googleSignInResult);
+            OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+            if (opr.isDone()) {
+                // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
+                // and the GoogleSignInResult will be available instantly.
+                Log.d(TAG, "Got cached sign-in");
+                GoogleSignInResult result = opr.get();
+                handleSignInResult(result);
+            } else {
+                // If the user has not previously signed in on this device or the sign-in has expired,
+                // this asynchronous branch will attempt to sign in the user silently.  Cross-device
+                // single sign-on will occur in this branch.
+                showProgressDialog();
+                opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                    @Override
+                    public void onResult(GoogleSignInResult googleSignInResult) {
+                        hideProgressDialog();
+                        handleSignInResult(googleSignInResult);
+                    }
+                });
+            }
+        }
+        else{
+            final AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
+            builder.setTitle("NO INTERNET");
+            builder.setIcon(R.drawable.ic_alert2);
+            builder.setMessage("No Internet Connection Available...Turn on Mobile data or Wifi.");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
                 }
             });
+
+            builder.create();
+            builder.show();
         }
     }
 
@@ -128,6 +182,7 @@ public class SignInActivity extends AppCompatActivity implements
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+            userName=acct.getDisplayName();
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
         } else {
@@ -189,9 +244,17 @@ public class SignInActivity extends AppCompatActivity implements
         mProgressDialog.show();
     }
 
+
     private void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.hide();
+        }
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if ( mProgressDialog!=null && mProgressDialog.isShowing() ){
+            mProgressDialog.cancel();
         }
     }
 

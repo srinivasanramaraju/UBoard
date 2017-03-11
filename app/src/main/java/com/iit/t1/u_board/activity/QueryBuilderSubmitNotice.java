@@ -56,7 +56,7 @@ public class QueryBuilderSubmitNotice {
      */
     public String buildContactsSaveURL()
     {
-        Log.d("QueryBuilderSbmtNotices", "Returning the user");
+        //Log.d("QueryBuilderSbmtNotices", "Returning the user");
         return getBaseUrl()+collectionRequest()+docApiKeyUrl();
     }
 
@@ -71,7 +71,7 @@ public class QueryBuilderSubmitNotice {
         return String
                 .format("{\"document\"  : {\"noticetitle\": \"%s\", "
                                 + "\"category\": \"%s\", \"description\": \"%s\", "
-                                + "\"NoticeId\": \"%s\"}, \"password\" : \"0\"}",
-                        uboardNotices.noticeTitle,uboardNotices.category, uboardNotices.description,uboardNotices.id);
+                                + "\"contactno\": \"%s\"}, \"owner\" : \"%s\"}",
+                        uboardNotices.noticeTitle,uboardNotices.category, uboardNotices.description,uboardNotices.contactNo,uboardNotices.owner);
     }
 }

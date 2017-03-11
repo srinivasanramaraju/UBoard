@@ -3,133 +3,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context="com.iit.t1.u_board.activity.HomeFragment">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:id="@+id/HomeIconlilayout">
 
-        <ImageView
-            android:layout_width="600dp"
-            android:layout_height="70dp"
-            android:id="@+id/imageView2"
-            android:src="@drawable/inlogo"
-
-            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@+id/HomeIconlilayout"
-        android:layout_alignParentStart="true"
-        android:id="@+id/newslayout"
-        >
-    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/newslayout"
-        android:id="@+id/chicagonewslayout"
-        android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        ></LinearLayout>
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_below="@+id/chicagonewslayout"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:id="@+id/tableLayout">
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/eventsButton"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/events"
-                android:layout_column="0"
-                android:onClick="eventsmenu"/>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/jobsButton"
-                android:layout_marginLeft="50dp"
-                android:background="@drawable/jobs"
-                android:layout_column="1"
-                android:onClick="jobsmenu"/>
-        </TableRow>
-
-        <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp">
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/saleButton"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/sale"
-                android:layout_column="0"
-                android:onClick="salemenu"/>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/houseButton"
-                android:layout_marginLeft="50dp"
-                android:background="@drawable/house"
-                android:layout_column="1"
-                android:onClick="housemenu"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="30dp">
-        </TableRow>
-
-    </TableLayout>
-
-    <FrameLayout
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tableLayout"
-        android:id="@+id/addframe"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="50dp"
+        android:layout_below="@+id/HomeIconlilayout">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:typeface="sans"
-            android:textSize="20dp"
-            android:text="space for ADD"
-            android:id="@+id/addtext"
-            android:layout_gravity="center" />
-    </FrameLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/events"
+                        android:onClick="eventsmenu"
+                        android:id="@+id/eventsButton"
+                        android:layout_weight="1" />
+
+
+                    <ImageButton
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/sales"
+                        android:onClick="salemenu"
+                        android:id="@+id/saleButton"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/button3"
+                    android:background="@drawable/homeimg"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_weight="1.00"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/houseButton"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:onClick="housemenu"
+                        android:background="@drawable/house" />
+
+
+                    <ImageButton
+                        android:id="@+id/jobsButton"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:onClick="jobsmenu"
+                        android:background="@drawable/jobs" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </GridLayout>
 
 
 </RelativeLayout>

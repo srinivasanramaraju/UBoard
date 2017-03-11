@@ -13,6 +13,7 @@
     <string name="nav_item_Jobs">Jobs and Opportunities</string>
     <string name="nav_item_Signout">Sign Out</string>
     <string name="category_prompt">Choose a Event</string>
+    <string name="MyPreferences">My Preferences</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -22,8 +23,8 @@
         <item>@string/nav_item_housing</item>
         <item>@string/nav_item_Events</item>
         <item>@string/nav_item_Jobs</item>
+        <item>@string/MyPreferences</item>
         <item>@string/nav_item_Signout</item>
-
     </string-array>
 
     <string-array name="category_arrays">
@@ -32,11 +33,12 @@
     <item>Housing</item>
     <item>Sales</item>
     </string-array>
-
+    <string name="facebook_app_id">570460446434648</string>
     <string name="title_sales">Sales</string>
     <string name="title_housing">Housing</string>
     <string name="title_events">Events</string>
     <string name="title_jobs_and_opportunities">Jobs and Opportunities</string>
+    <string name="preferences">My Preferences</string>
     <string name="title_signout">Sign Out</string>
     <string name="title_new_notice">New Notice</string>
     <string name="title_home">Home</string>
@@ -80,7 +82,7 @@
          from https://console.developers.google.com/ -->
     <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
     <string name="menu_delete">Delete Notice</string>
-    <string name="menu_share">Share Notice</string>
+    <string name="menu_share">Share</string>
     <string name="menu_update">Update Notice</string>
 
 

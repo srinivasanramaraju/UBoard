@@ -1,10 +1,10 @@
 package com.iit.t1.u_board.activity;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -18,6 +18,11 @@ public class GetNoticeAsyncTask extends AsyncTask <UboardNotices, Void, ArrayLis
     static String OriginalObject = "";
     static String server_output = null;
     static String temp_output = null;
+    static String categoryType;
+    public void getCategory(String category)
+    {
+        categoryType=category;
+    }
 
     @Override
     protected ArrayList<UboardNotices> doInBackground(UboardNotices... arg0) {
@@ -42,32 +47,35 @@ public class GetNoticeAsyncTask extends AsyncTask <UboardNotices, Void, ArrayLis
 
             while ((temp_output = br.readLine()) != null) {
                 server_output = temp_output;
-                Log.d("GetNotice",server_output);
+              //  Log.d("GetNotice",server_output);
             }
 
 // create a basic db list
 
             String mongoarray = "{ artificial_basicdb_list: "+server_output+"}";
             Object o = com.mongodb.util.JSON.parse(mongoarray);
-            Log.d("GetNotice",mongoarray);
+            //Log.d("GetNotice",mongoarray);
             DBObject dbObj = (DBObject) o;
             BasicDBList contacts = (BasicDBList) dbObj.get("artificial_basicdb_list");
-            Log.d("GetNotice","Getinng list");
+            //Log.d("GetNotice","Getinng list");
             for (Object obj : contacts) {
-                Log.d("Inside Loop", "Inside Loop");
+                //Log.d("Inside Loop", "Inside Loop");
                 DBObject userObj = (DBObject) obj;
-                Log.d("Inside Loop", "Inside Loop--1");
+                //Log.d("Inside Loop", "Inside Loop--1");
                 UboardNotices temp = new UboardNotices();
                 temp.setId(userObj.get("_id").toString());
-                Log.d("Inside Loop", "Inside Loop--2");
+                //Log.d("Inside Loop", "Inside Loop--2");
                 DBObject newobj= (DBObject) userObj.get("document");
-                temp.setnoticeTitle (newobj.get("noticetitle").toString());
-                Log.d("Inside Loop", "Inside Loop--3");
+                temp.setnoticeTitle(newobj.get("noticetitle").toString());
+                //Log.d("Inside Loop", "Inside Loop--3");
                 temp.setDescription(newobj.get("description").toString());
-                Log.d("Inside Loop", "Inside Loop--4");
+                //Log.d("Inside Loop", "Inside Loop--4");
                 temp.setCategory(newobj.get("category").toString());
-                Log.d("GetNoticeBrd",temp.toString());
-                mycontacts.add(temp);
+                //Log.d("GetNoticeBrd",temp.toString());
+                temp.setContactNo(newobj.get("contactno").toString());
+                if(temp.getCategory().toString().equalsIgnoreCase(categoryType)) {
+                    mycontacts.add(temp);
+                }
             }
 
         }catch (Exception e) {
@@ -77,3 +85,6 @@ public class GetNoticeAsyncTask extends AsyncTask <UboardNotices, Void, ArrayLis
         return mycontacts;
     }
 }
+
+
+

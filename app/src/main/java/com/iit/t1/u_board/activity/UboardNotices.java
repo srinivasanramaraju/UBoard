@@ -13,6 +13,8 @@ import com.iit.t1.u_board.R;
     public String date;
     public String id;
     public String document;
+    public String contactNo;
+    public String owner;
     public static int[] noticepics = {R.drawable.ic_launcher_negative};
     // send current sys date
 
@@ -26,17 +28,17 @@ import com.iit.t1.u_board.R;
 
     public void setCategory(String category) {
         this.category = category;
-        System.out.println(this.category);
+        //System.out.println(this.category);
     }
 
     public void setDescription(String description) {
         this.description = description;
-        System.out.println(this.description);
+        //System.out.println(this.description);
     }
 
     public void setnoticeTitle(String noticeTitle) {
         this.noticeTitle = noticeTitle;
-        System.out.println(this.noticeTitle);
+        //System.out.println(this.noticeTitle);
     }
 
     public String getNoticeTitle() {
@@ -53,5 +55,15 @@ import com.iit.t1.u_board.R;
 
     public String getDescription() {
         return description;
+    }
+    public String getContacNo()
+    {
+        return contactNo;
+    }
+    public String getOwner(){return owner;}
+    public void setOwner(String owner){this.owner=owner;}
+    public void setContactNo(String contactNo)
+    {
+        this.contactNo=contactNo;
     }
 }

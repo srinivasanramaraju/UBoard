@@ -1,6 +1,6 @@
 package com.iit.t1.u_board.activity;
 import android.os.AsyncTask;
-import android.util.Log;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -28,12 +28,12 @@ public class SubmitNoticeAsyncTask extends AsyncTask<UboardNotices, Void, Boolea
 
             if(response.getStatusLine().getStatusCode()<205)
             {
-                Log.d("SubmitNoticeAsyncTask", "Added the record");
+                //Log.d("SubmitNoticeAsyncTask", "Added the record");
                 return true;
             }
             else
             {
-                Log.d("SubmitNoticeAsyncTask", "Failed to add record");
+                //Log.d("SubmitNoticeAsyncTask", "Failed to add record");
                 return false;
             }
         } catch (Exception e) {

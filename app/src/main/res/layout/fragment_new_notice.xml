@@ -1,71 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="#FFFFFF">
+<LinearLayout android:orientation="vertical"
+    android:id="@+id/parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bgimg">
 
-    <TextView
-        android:layout_width="402dp"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:id="@+id/textView6"
-        android:layout_weight="0.03"
-        android:textSize="34dp"
-        android:textColor="#ff2a56c6"
-        android:layout_marginTop="20dp"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextNoticetitle"
-        android:layout_weight="0.03" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/createNoticeImage">
+                    <LinearLayout
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Category"
-        android:id="@+id/textView7"
-        android:layout_weight="0.09"
-        android:textSize="34dp"
-        android:textColor="#ff2a56c6"
-        android:layout_marginTop="20dp"/>
+                        android:paddingLeft="10.0dip"
+                        android:paddingRight="10.0dip"
+                        android:paddingBottom="10.0dip"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnercategory"
-        android:layout_weight="0.03"
-        android:entries="@array/category_arrays"
-        android:prompt="@string/category_prompt"
-        android:spinnerMode="dropdown" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:id="@+id/textView8"
-        android:textSize="34dp"
-        android:textColor="#ff2a56c6"
-        android:layout_marginTop="20dp"/>
+                        <ScrollView android:scrollbars="none"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fillViewport="true">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editTextDescription"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.34" />
+                            <LinearLayout android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="1"
+                                android:paddingTop="30dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Notice"
-        android:id="@+id/buttoncreatenotice"
-        android:layout_gravity="right"
-        android:layout_weight="0.03"
-        android:onClick="SubmitNotice"
-        android:layout_marginTop="20dp"/>
 
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/imageView4"
+                                    android:src="@drawable/newnotice"
+                                    android:layout_gravity="center_horizontal" />
+
+                                <LinearLayout android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="fill_parent"
+                                    android:layout_marginTop="5.0dip"
+                                    android:onClick="eventsmenu">
+
+                                </LinearLayout>
+
+                                <EditText
+
+                                    android:padding="10.0dip"
+                                    android:layout_width="fill_parent"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10.0dip"
+                                    android:hint="Enter Title here.."
+                                    android:singleLine="true"
+                                    android:maxLength="100"
+                                    android:id="@+id/editTextNoticetitle"
+                                    android:inputType="textCapSentences"
+                                    android:imeActionLabel="Next"  />
+
+                                <LinearLayout android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="fill_parent"
+                                    android:layout_marginTop="10.0dip"
+
+                                    >
+
+                                    <Spinner
+                                        android:layout_width="fill_parent"
+                                        android:textColor="@color/textColorPrimary"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="5.0dip"
+
+                                        android:id="@+id/spinnercategory"
+                                        android:entries="@array/category_arrays"
+                                        android:prompt="@string/category_prompt"
+                                        android:spinnerMode="dropdown" />
+
+                                </LinearLayout>
+
+                                <RelativeLayout
+                                    android:gravity="top|left|center"
+
+                                    android:paddingBottom="10.0dip"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5.0dip"
+                                    >
+
+                                    <EditText
+                                        android:layout_marginTop="10dp"
+                                        android:padding="10.0dip"
+                                        android:singleLine="true"
+                                        android:id="@+id/editTextNoticeimg"
+                                        android:imeActionLabel="Next"
+                                        android:gravity="top|left|center"
+                                        android:scrollbars="vertical"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.0"
+                                        android:inputType="textCapSentences"
+                                        android:textColor="@color/textColorPrimary"
+                                        android:hint="Click icon to Add Image.."
+                                        android:layout_alignTop="@+id/imageView5"
+                                        android:layout_alignEnd="@+id/imageView5" />
+
+                                    <ImageView
+                                        android:focusable="false"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/icon_addimage"
+                                        android:id="@+id/imageView5"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignParentEnd="true" />
+
+                                </RelativeLayout>
+
+
+                                <EditText
+
+                                    android:padding="10.0dip"
+                                    android:layout_width="fill_parent"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5.0dip"
+                                    android:hint="Enter Contact Number here.."
+                                    android:singleLine="true"
+                                    android:maxLength="100"
+                                    android:id="@+id/editTextNoticecontact"
+                                    android:inputType="textCapSentences"
+                                    android:imeActionLabel="Next"  />
+
+                                <EditText
+                                    android:gravity="top|left|center"
+
+                                    android:padding="10.0dip"
+                                    android:scrollbars="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="43dp"
+                                    android:layout_marginTop="5.0dip"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:hint="Enter Description here.."
+                                    android:maxLines="4"
+                                    android:minLines="4"
+                                    android:maxLength="500"
+                                    android:inputType="textCapSentences|textMultiLine"
+                                    android:imeActionLabel="Next"
+                                    android:id="@+id/editTextDescription"/>
+
+
+
+                                <Button
+                                    android:paddingTop="10.0dip"
+                                    android:paddingBottom="10.0dip"
+                                    android:layout_height="40dp"
+                                    android:layout_width="fill_parent"
+                                    android:layout_marginTop="10.0dip"
+                                    android:id="@+id/buttoncreatenotice"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:text="Create Notice"
+                                    android:onClick="SubmitNotice"
+                                    android:background="@color/colorPrimary"
+                                    android:layout_weight="0.60" />
+                            </LinearLayout>
+                        </ScrollView>
+                    </LinearLayout>
+            </RelativeLayout>
+
+    </LinearLayout>
 </LinearLayout>
